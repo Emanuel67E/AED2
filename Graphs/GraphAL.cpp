@@ -44,7 +44,7 @@ void GraphAL<T>::add_edge(Vertex u, Vertex v) {
       notIn = 0;
     }
   }
-  if(notIn) {
+  if(notIn && (u!=v)) {
     adj[u].push_back(v);
     adj[v].push_back(u);
     ++num_edges;
@@ -76,14 +76,15 @@ void print_graph(GraphAL<T> g) {
   uint num_edges = g.get_num_edges();
 
   std::cout << "num_vertices: " << num_vertices << "\n";
-  std::cout << "num_edges: " << num_edges;
+  std::cout << "num_edges: " << num_edges << "\n";
 
   for(int i=0; i<num_vertices; ++i) {
-    std::cout << "\n" << i << ": ";
+    std::cout << i << ": ";
     std::list adj = g.get_adj(i);
     for(auto e: adj) {
       std::cout << e << ", ";
     }
+    std::cout << "\n";
   }
 }
 
