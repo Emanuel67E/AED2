@@ -59,6 +59,7 @@ void GraphAL<T>::remove_edge(Vertex u, Vertex v) {
 
 template <typename T>
 void input_graph(GraphAL<T>& g, uint num_edges) {
+  uint max_vertice = g.get_num_vertices();
   T u, v;
   for(int i=0; i<num_edges; ++i) {
     std::cin >> u >> v;
