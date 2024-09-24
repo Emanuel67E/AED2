@@ -53,12 +53,8 @@ void GraphAL<T>::add_edge(Vertex u, Vertex v) {
 
 template <typename T>
 void GraphAL<T>::remove_edge(Vertex u, Vertex v) {
-  for(auto e: adj[u]) {
-    if(e == v) {
-      adj[u].erase(e);
-      break;
-    }
-  }
+  adj[u].remove(v);
+  adj[v].remove(u);
 }
 
 template <typename T>
@@ -66,7 +62,9 @@ void input_graph(GraphAL<T>& g, uint num_edges) {
   T u, v;
   for(int i=0; i<num_edges; ++i) {
     std::cin >> u >> v;
-    g.add_edge(u, v);
+    if(u>=0 && u<max_vertice && v>=0 && v<max_vertice) {
+      g.add_edge(u, v);
+    }
   }
 }
 
