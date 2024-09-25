@@ -17,7 +17,13 @@ public:
   void remove_edge(Vertex, Vertex);
   uint get_num_vertices() {return num_vertices;}
   uint get_num_edges() {return num_edges;}
-  std::list<T> get_adj(Vertex u) {return adj[u];}
+  std::list<T> get_adj(Vertex u) {
+    if(0<=u && u<num_vertices) {
+      return adj[u];
+    }
+    std::list<T> void_l;
+    return void_l;
+  }
 };
 
 template <typename T>
@@ -44,7 +50,9 @@ void GraphAL<T>::add_edge(Vertex u, Vertex v) {
       notIn = 0;
     }
   }
-  if(notIn && (u!=v)) {
+  int nv = num_vertices;
+  int valid = (u!=v) && (0<=u && u<nv && 0<=v && v<nv);
+  if(notIn && valid) {
     adj[u].push_back(v);
     adj[v].push_back(u);
     ++num_edges;
